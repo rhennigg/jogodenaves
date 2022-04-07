@@ -3,12 +3,26 @@ function start() {
     var inicio = document.getElementById("inicio");
     inicio.style.display = 'none';
 	// $("#fundoGame").append("<div id='jogador' class='anima1'></div>");
-    document.querySelector('#jogador .anima1');
-	// $("#fundoGame").append("<div id='inimigo1'class='anima2'></div>");
+    let div_jogador = document.querySelector('#fundoGame').appendChild(document.createElement('div'));
+    div_jogador.setAttribute('id','jogador');
+    div_jogador.classList.add('anima1');
+	//$("#fundoGame").append("<div id='inimigo1'class='anima2'></div>");
+    let div_inimigo1 = document.querySelector('#fundoGame').appendChild(document.createElement('div'));
+    div_inimigo1.setAttribute('id','inimigo1');
+    div_inimigo1.classList.add('anima2');
 	// $("#fundoGame").append("<div id='inimigo2'></div>");
+    let div_inimigo2 = document.querySelector('#fundoGame').appendChild(document.createElement('div'));
+    div_inimigo2.setAttribute('id','inimigo2');
 	// $("#fundoGame").append("<div id='amigo' class='anima3'></div>");
+    let div_amigo = document.querySelector('#fundoGame').appendChild(document.createElement('div'));
+    div_amigo.setAttribute('id','amigo');
+    div_amigo.classList.add('anima3');
     // $("#fundoGame").append("<div id='placar'></div>");
+    let div_placar = document.querySelector('#fundoGame').appendChild(document.createElement('div'));
+    div_placar.setAttribute('id','placar');
     // $("#fundoGame").append("<div id='energia'></div>");
+    let div_energia = document.querySelector('#fundoGame').appendChild(document.createElement('div'));
+    div_energia.setAttribute('id','energia');
 	
 	var jogo = {}
 	jogo.timer = setInterval(loop,30);
@@ -68,18 +82,24 @@ function start() {
 	function movejogador() {	
         if (jogo.pressionou[TECLA.W]) {
             var topo = parseInt($("#jogador").css("top"));
-            $("#jogador").css("top",topo-10);
-            if (topo<=0) {
-                $("#jogador").css("top",topo+10);
+            if (topo > 0) {
+                $("#jogador").css("top",topo-10);
             }
+            // $("#jogador").css("top",topo-10);
+            // if (topo<=0) {
+            //     $("#jogador").css("top",topo+10);
+            // }
         }
         
         if (jogo.pressionou[TECLA.S]) {		
             var topo = parseInt($("#jogador").css("top"));
-            $("#jogador").css("top",topo+10);	
-            if (topo>=434) {	
-                $("#jogador").css("top",topo-10);
+            if (topo < 434) {	
+                $("#jogador").css("top",topo+10);	
             }
+            // $("#jogador").css("top",topo+10);	
+            // if (topo>=434) {	
+            //     $("#jogador").css("top",topo-10);
+            // }
         }
         
         if (jogo.pressionou[TECLA.D]) {
@@ -140,7 +160,6 @@ function start() {
             tempoDisparo=window.setInterval(executaDisparo, 30);
         }
     }
-
 
     function colisao() {
         var colisao1 = ($("#jogador").collision($("#inimigo1")));
