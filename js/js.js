@@ -6,6 +6,9 @@ function start() {
     let div_jogador = document.querySelector('#fundoGame').appendChild(document.createElement('div'));
     div_jogador.setAttribute('id','jogador');
     div_jogador.classList.add('anima1');
+    div_jogador.style.left = "8px";
+    //console.log(parseInt(div_jogador.style.right));
+    console.log(getComputedStyle(div_jogador).left);
 	//$("#fundoGame").append("<div id='inimigo1'class='anima2'></div>");
     let div_inimigo1 = document.querySelector('#fundoGame').appendChild(document.createElement('div'));
     div_inimigo1.setAttribute('id','inimigo1');
@@ -161,15 +164,28 @@ function start() {
         }
     }
 
+    function checa_colisao(obj1, obj2){
+        if(((obj1.getBoundingClientRect().right > obj2.getBoundingClientRect().left) && (obj1.getBoundingClientRect().top < obj2.getBoundingClientRect().bottom) && (obj1.getBoundingClientRect().top > obj2.getBoundingClientRect().top)) || (obj1.getBoundingClientRect().right > obj2.getBoundingClientRect().left) && (obj1.getBoundingClientRect().bottom > obj2.getBoundingClientRect().top) && (obj1.getBoundingClientRect().top < obj2.getBoundingClientRect().bottom))
+            return true;
+        else return false;
+    }
+
     function colisao() {
-        var colisao1 = ($("#jogador").collision($("#inimigo1")));
+        /*var colisao1 = ($("#jogador").collision($("#inimigo2")));
         var colisao2 = ($("#jogador").collision($("#inimigo2")));
         var colisao3 = ($("#disparo").collision($("#inimigo1")));
         var colisao4 = ($("#disparo").collision($("#inimigo2")));
         var colisao5 = ($("#jogador").collision($("#amigo")));
         var colisao6 = ($("#inimigo2").collision($("#amigo")));
-
-        if (colisao1.length > 0) {
+        */
+        var colisao1 = checa_colisao(div_jogador,div_inimigo1);
+        var colisao2 = checa_colisao(div_jogador,div_inimigo2);
+        var colisao3 = checa_colisao(div_disparo,div_inimigo1);
+        var colisao4 = checa_colisao(div_disparo,div_inimigo2);
+        var colisao5 = checa_colisao(div_jogador,div_amigo);
+        var colisao6 = checa_colisao(div_inimigo2,div_amigo);
+        //if (colisao1.length>0)
+        if (colisao1) {
             energiaAtual--;
             inimigo1X = parseInt($("#inimigo1").css("left"));
             inimigo1Y = parseInt($("#inimigo1").css("top"));
@@ -178,7 +194,7 @@ function start() {
             $("#inimigo1").css("left", 694);
             $("#inimigo1").css("top", posicaoY);
         }
-        if (colisao2.length>0) {
+        if (colisao2) {
             energiaAtual--;
             inimigo2X = parseInt($("#inimigo2").css("left"));
             inimigo2Y = parseInt($("#inimigo2").css("top"));
@@ -186,7 +202,7 @@ function start() {
             $("#inimigo2").remove();
             reposicionaInimigo2();        
         }
-        if (colisao3.length>0) {
+        if (colisao3) {
             pontos=pontos+100;
             velocidade=velocidade+0.3;
             inimigo1X = parseInt($("#inimigo1").css("left"));
@@ -198,7 +214,7 @@ function start() {
             $("#inimigo1").css("top",posicaoY);           
         }
 
-        if (colisao4.length>0) {
+        if (colisao4) {
             pontos=pontos+50;
             inimigo2X = parseInt($("#inimigo2").css("left"));
             inimigo2Y = parseInt($("#inimigo2").css("top"));
@@ -208,14 +224,14 @@ function start() {
             reposicionaInimigo2();       
         }
 
-        if (colisao5.length>0) {
+        if (colisao5) {
             somResgate.play();
             salvos++;
             reposicionaAmigo();
             $("#amigo").remove();
         }
 
-        if (colisao6.length>0) {
+        if (colisao6) {
             perdidos++;
             amigoX = parseInt($("#amigo").css("left"));
             amigoY = parseInt($("#amigo").css("top"));
