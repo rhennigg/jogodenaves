@@ -278,7 +278,7 @@ function start() {
                 window.clearInterval(tempoExplosao2);
                 tempoExplosao2=null;   
             }
-        } // Fim da função explosao2()
+        } 
     
     function explosao3(amigoX,amigoY) {
         somPerdido.play();
@@ -291,11 +291,11 @@ function start() {
             window.clearInterval(tempoExplosao3);
             tempoExplosao3=null;       
         }    
-    } // Fim da função explosao3
+    } 
 
     function placar() {
         $("#placar").html("<h2> Pontos: " + pontos + " Salvos: " + salvos + " Perdidos: " + perdidos + "</h2>");
-    } //fim da função placar()
+    } 
 
     function energia() {
 		if (energiaAtual==3) {
@@ -314,7 +314,7 @@ function start() {
 			$("#energia").css("background-image", "url(imgs/energia0.png)");
             gameOver();
 		}
-	} // Fim da função energia()
+	} 
 
     function gameOver() {
         fimdejogo=true;
@@ -332,11 +332,11 @@ function start() {
         $("#fundoGame").append("<div id='fim'></div>");
         
         $("#fim").html("<h1> Game Over </h1><p>Sua pontuação foi: " + pontos + "</p>" + "<div id='reinicia' onClick=reiniciaJogo()><h3>Jogar Novamente</h3></div>");
-    } // Fim da função gameOver();
+    } 
 }
 
 function reiniciaJogo() {
     somGameover.pause();
     $("#fim").remove();
     start();
-} //Fim da função reiniciaJogo
+} 
